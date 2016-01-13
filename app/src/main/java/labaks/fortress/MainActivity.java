@@ -1,18 +1,28 @@
 package labaks.fortress;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import android.widget.RelativeLayout;
+
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        View view = new Card(this, Color.GREEN, Color.RED, Color.BLUE, Color.BLACK);
+
+        RelativeLayout main = (RelativeLayout) findViewById(R.id.rLayout);
+        main.addView(view);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
