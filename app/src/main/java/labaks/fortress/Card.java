@@ -11,7 +11,7 @@ public class Card extends View {
 
     int top, right, bottom, left;
     Paint mPaint;
-    Path mPath;
+    Path topTriangle, rightTriangle, bottomTriangle, leftTriangle;
     int side = 100;
 
     public Card(Context context, int top, int right, int bottom, int left) {
@@ -23,7 +23,6 @@ public class Card extends View {
         this.left = left;
 
         mPaint = new Paint();
-        mPath = new Path();
     }
 
     @Override
@@ -32,26 +31,37 @@ public class Card extends View {
         mPaint.setStrokeWidth(1);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         // top
-        mPath.moveTo(0, 0);
-        mPath.lineTo(side / 2, side / 2);
-        mPath.lineTo(side, 0);
-        mPath.close();
+        topTriangle = new Path();
+        topTriangle.moveTo(0, 0);
+        topTriangle.lineTo(side / 2, side / 2);
+        topTriangle.lineTo(side, 0);
+        topTriangle.close();
         mPaint.setColor(top);
-        canvas.drawPath(mPath, mPaint);
+        canvas.drawPath(topTriangle, mPaint);
         // right
-        mPath.moveTo(side, 0);
-        mPath.lineTo(side / 2, side / 2);
-        mPath.lineTo(side, side);
-        mPath.close();
+        rightTriangle = new Path();
+        rightTriangle.moveTo(side, 0);
+        rightTriangle.lineTo(side / 2, side / 2);
+        rightTriangle.lineTo(side, side);
+        rightTriangle.close();
         mPaint.setColor(right);
-        canvas.drawPath(mPath, mPaint);
+        canvas.drawPath(rightTriangle, mPaint);
         // bottom
-        mPath.moveTo(side, side);
-        mPath.lineTo(side / 2, side / 2);
-        mPath.lineTo(0, side);
-        mPath.close();
+        bottomTriangle = new Path();
+        bottomTriangle.moveTo(side, side);
+        bottomTriangle.lineTo(side / 2, side / 2);
+        bottomTriangle.lineTo(0, side);
+        bottomTriangle.close();
         mPaint.setColor(bottom);
-        canvas.drawPath(mPath, mPaint);
+        canvas.drawPath(bottomTriangle, mPaint);
+        // left
+        leftTriangle = new Path();
+        leftTriangle.moveTo(0, side);
+        leftTriangle.lineTo(side/2, side/2);
+        leftTriangle.lineTo(0, 0);
+        leftTriangle.close();
+        mPaint.setColor(left);
+        canvas.drawPath(leftTriangle, mPaint);
 
     }
 }
