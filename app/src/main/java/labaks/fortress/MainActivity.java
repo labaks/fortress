@@ -7,22 +7,62 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
+
+    int[] colors = {Color.GREEN, Color.RED, Color.BLUE, Color.BLACK};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        View view = new Card(this, Color.GREEN, Color.RED, Color.BLUE, Color.BLACK);
+        final Card view = new Card(this, getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor());
 
-        RelativeLayout main = (RelativeLayout) findViewById(R.id.rLayout);
-        main.addView(view);
+        RelativeLayout preview = (RelativeLayout) findViewById(R.id.preview);
+        preview.addView(view);
+
+        Button rotateLeft = (Button)findViewById(R.id.rotateLeft);
+        rotateLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rotateLeftImpl(view);
+            }
+        });
+
+        Button rotateRight = (Button)findViewById(R.id.rotateRight);
+        rotateRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rotateRightImpl(view);
+            }
+        });
 
     }
 
+    public int getRandomColor() {
+        return colors[(int)(Math.random()*3)];
+    }
+
+    public void rotateLeftImpl(Card card) {
+        int temp = card.top;
+        card.top = card.right;
+        card.right = card.bottom;
+        card.bottom = card.left;
+        card.left = temp;
+        card.invalidate();
+    }
+
+    public void rotateRightImpl(Card card) {
+        int temp = card.top;
+        card.top = card.left;
+        card.left = card.bottom;
+        card.bottom = card.right;
+        card.right = temp;
+        card.invalidate();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
