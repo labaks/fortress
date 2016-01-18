@@ -42,9 +42,13 @@
             android:text="ok" />
     </TableLayout>
 
-    <TableLayout
-        android:id="@+id/field"
+    <GridView
+        android:id="@+id/desk"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:columnWidth="100px"
+        android:horizontalSpacing="0dp"
+        android:numColumns="10"
+        android:verticalSpacing="0dp" />
 
 </LinearLayout>
